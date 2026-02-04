@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Café | Maison d'Excellence</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@200;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="vip-toast" class="vip-toast">
+        <i>⚜️</i> <span data-pt="Benefício VIP: 8% OFF automático aplicado!" data-en="VIP Benefit: 8% auto OFF applied!">Benefício VIP: 8% OFF automático aplicado!</span>
+    </div>
+
+    <div id="loader" class="maison-loader">
+        <div class="loader-content">
+            <h1 class="loader-logo">LE CAFÉ</h1>
+            <div class="loader-bar-container"><div class="loader-bar-fill"></div></div>
+            <p data-pt="CONECTANDO À MAISON..." data-en="CONNECTING TO THE MAISON...">CONECTANDO À MAISON...</p>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop></audio>
+    <div id="music-wrapper">
+        <input type="range" id="volume-control" min="0" max="1" step="0.1" value="0.5">
+        <div id="music-control" onclick="toggleMusic()"><span id="music-icon">🔇</span></div>
+    </div>
+
+    <header class="main-nav">
+        <div class="container nav-grid">
+            <div class="nav-utils">
+                <button class="icon-circle" onclick="toggleTheme()">🌓</button>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="setLanguage('pt')">PT</button>
+                    <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                </div>
+            </div>
+            <div class="nav-brand">
+                <small onclick="openVip()" style="cursor:pointer; color:var(--gold);" data-pt="CHAMBRE NOIRE 🔒" data-en="BLACK ROOM 🔒">CHAMBRE NOIRE 🔒</small>
+                <h1>LE CAFÉ</h1>
+                <small>SINCE 2025</small>
+            </div>
+            <div class="nav-actions">
+                <div class="bag-trigger" onclick="toggleBag(true)">
+                    <div class="bag-info"><span id="bag-count" data-pt="0 ITENS" data-en="0 ITEMS">0 ITENS</span></div>
+                    <span class="bag-icon">👜</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h2 data-pt="Onde o Café <br>Encontra a Arte" data-en="Where Coffee <br>Meets Art">Onde o Café <br>Encontra a Arte</h2>
+                <button class="btn-main" onclick="document.getElementById('menu-start').scrollIntoView()" data-pt="EXPLORAR" data-en="EXPLORE">EXPLORAR</button>
+            </div>
+        </section>
+
+        <section id="order-tracker" class="container hidden" style="margin-top: 40px;">
+            <div class="tracker-card">
+                <h4 data-pt="STATUS DO SEU PEDIDO" data-en="ORDER STATUS">STATUS DO SEU PEDIDO</h4>
+                <div class="progress-container">
+                    <div class="progress-line"><div id="order-progress-fill" class="progress-fill"></div></div>
+                    <div class="steps">
+                        <div class="step" id="step1"><span>1</span><p data-pt="Recebido" data-en="Received">Recebido</p></div>
+                        <div class="step" id="step2"><span>2</span><p data-pt="Preparo" data-en="Preparing">Preparo</p></div>
+                        <div class="step" id="step3"><span>3</span><p data-pt="Rota" data-en="On Way">Rota</p></div>
+                        <div class="step" id="step4"><span>4</span><p data-pt="Entregue" data-en="Delivered">Entregue</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="cat-nav" id="menu-start">
+            <div class="container cat-flex">
+                <button class="cat-item active" onclick="render('cafes', this)" data-pt="CAFÉS" data-en="COFFEE">CAFÉS</button>
+                <button class="cat-item" onclick="render('brunch', this)" data-pt="BRUNCH" data-en="BRUNCH">BRUNCH</button>
+                <button class="cat-item" onclick="render('patisserie', this)" data-pt="DOCES" data-en="SWEETS">DOCES</button>
+                <button class="cat-item" onclick="render('vip', this)" id="nav-vip-btn" style="display:none; color:var(--gold);">⚜️ VIP</button>
+            </div>
+        </nav>
+
+        <section class="products-area container">
+            <div id="p-grid" class="products-grid"></div>
+        </section>
+    </main>
+
+    <footer class="maison-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h2>LE CAFÉ</h2>
+                <p data-pt="Fundada em 2025, a Maison Le Café nasceu para redefinir o conceito de café premium. O futuro da excelência começa aqui." 
+                   data-en="Founded in 2025, Maison Le Café was born to redefine the concept of premium coffee. The future of excellence starts here.">
+                   Fundada em 2025, a Maison Le Café nasceu para redefinir o conceito de café premium. O futuro da excelência começa aqui.
+                </p>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/euclarinhaa_012/" target="_blank">INSTAGRAM</a>
+                    <a href="#">PINTEREST</a>
+                    <a href="https://www.tiktok.com/@eu_clarinha006" target="_blank">TIKTOK</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4 data-pt="A MAISON" data-en="THE MAISON">A MAISON</h4>
+                <ul>
+                    <li data-pt="Nossa História" data-en="Our Story" onclick="openHistory()" style="cursor: pointer;">Nossa História</li>
+                    <li data-pt="Unidades" data-en="Locations">Unidades</li>
+                    <li data-pt="Carreiras" data-en="Careers">Carreiras</li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4 data-pt="CONTATO" data-en="CONTACT">CONTATO</h4>
+                <p>contato@lecafe.com.br</p>
+                <p>+55 (11) 9999-9999</p>
+                <p>Santana do Matos | Paris</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 LE CAFÉ - DESIGNED BY <span class="gold-text">@EUCLARINHAA_012</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="bag-sidebar" class="sidebar">
+        <div class="side-head"><h3 data-pt="SUA BOLSA" data-en="YOUR BAG">SUA BOLSA</h3><button class="close-side" onclick="toggleBag(false)">×</button></div>
+        <div id="bag-items-list" class="items-list"></div>
+        <div class="side-foot">
+            <div class="summary">
+                <div class="s-row"><span data-pt="Subtotal" data-en="Subtotal">Subtotal</span><span id="sub-val">R$ 0,00</span></div>
+                <div class="s-row" style="color:var(--gold);"><span data-pt="Economia (VIP/Cupom)" data-en="Savings (VIP/Coupon)">Economia (VIP/Cupom)</span><span id="off-val">R$ 0,00</span></div>
+                <div class="s-row total"><span data-pt="Total" data-en="Total">Total</span><span id="total-val">R$ 0,00</span></div>
+            </div>
+            <button class="btn-checkout" onclick="initiateOrder()" data-pt="CONFIRMAR PEDIDO" data-en="CONFIRM ORDER">CONFIRMAR PEDIDO</button>
+        </div>
+    </div>
+
+    <div id="vip-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 data-pt="CHAMBRE NOIRE" data-en="BLACK ROOM">CHAMBRE NOIRE</h2>
+            <input type="password" id="vip-key" placeholder="SECRET KEY">
+            <button class="btn-main" onclick="authVip()" data-pt="ACESSAR" data-en="ACCESS">ACESSAR</button>
+        </div>
+    </div>
+
+    <div id="history-modal" class="modal-overlay" onclick="closeHistory(event)">
+        <div class="modal-box" style="width: 80%; max-width: 600px; text-align: left; line-height: 1.6;">
+            <h2 style="font-family: 'Playfair Display'; color: var(--gold); margin-bottom: 20px;" data-pt="Nossa História" data-en="Our Story">Nossa História</h2>
+            <div id="history-text" style="color: var(--txt); font-size: 0.95rem;"></div>
+            <button class="btn-main" style="margin-top: 30px; width: 100%;" onclick="document.getElementById('history-modal').style.display='none'">FECHAR</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
